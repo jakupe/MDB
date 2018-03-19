@@ -1,17 +1,24 @@
 package com.example.pfeifle.mdb;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class Main extends AppCompatActivity {
@@ -23,6 +30,7 @@ public class Main extends AppCompatActivity {
     // text and buttons
     EditText movieName;
     Button searchBtn;
+    ListView lv;
 
     // needed classes
     Movie movies[];
@@ -35,6 +43,7 @@ public class Main extends AppCompatActivity {
         // init Text und Buttons
         movieName = (EditText) findViewById(R.id.movieName);
         searchBtn = (Button) findViewById(R.id.searchBtn);
+        lv = (ListView) findViewById(R.id.listView);
 
         searchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -46,14 +55,16 @@ public class Main extends AppCompatActivity {
     }
 
     void searchMovie(View v) {
-        // TODO name
-        if(!movieName.getText().toString().matches(""))
+        if(!movieName.getText().toString().matches("")) {
             getMovies(movieName.getText().toString());
-        else
+            display();
+        } else
             Toast.makeText(this, "Bitte Filmname eingeben", Toast.LENGTH_SHORT).show();
 
+        /*
         for (int i=0; i<movies.length; i++)
             Log.i("MDB", "movie Name= "+movies[i].title);
+        */
 
     }
 
@@ -75,7 +86,7 @@ public class Main extends AppCompatActivity {
             movies = new Movie[len];
 
             // loop to split results and get movies
-            for(int i= 0; i<len; i++)
+            for(int i=0; i<len; i++)
                 movies[i] = new Movie(new ApiAccess().execute(getDetailsUrl1
                         + new JSONObject(ja.getString(i)).getString("id") // get id
                         + getDetailsUrl2).get());
@@ -85,8 +96,24 @@ public class Main extends AppCompatActivity {
         catch (JSONException e)         { e.printStackTrace(); }
     }
 
+
     private void display() {
-        // TODO
+        List valueList = new ArrayList<String>();
+        for(int i=0; i<10; i++)
+        valueList.add(movies[i].title);
+
+        ListAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
+
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // TODO details
+
+            }
+        });
+
+
     }
 
 }
