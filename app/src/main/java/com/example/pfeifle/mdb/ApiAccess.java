@@ -1,8 +1,6 @@
 package com.example.pfeifle.mdb;
 
 import android.os.AsyncTask;
-import android.util.Log;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
@@ -12,7 +10,6 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 
 
@@ -20,12 +17,12 @@ import java.io.IOException;
  * Created by Pfeifle on 15.03.2018.
  */
 
-public class ApiAccess extends AsyncTask<String, Void, String> {
+public class ApiAccess extends AsyncTask<String, Void, JSONObject> {
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected JSONObject doInBackground(String... strings) {
         JSONObject jo = null;
-        String result = null;
+
         try {
             // get Request-Factory
             HttpTransport ht = new NetHttpTransport();
@@ -44,21 +41,17 @@ public class ApiAccess extends AsyncTask<String, Void, String> {
             // parse JSON
             jo = new JSONObject(js);
 
-            // get String
-            result = jo.getString(strings[1]);
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return result;
+        return jo;
     }
 
-
     @Override
-    protected void onPostExecute(String result){
-        super.onPostExecute(result);
+    protected void onPostExecute(JSONObject jo){
+        super.onPostExecute(jo);
     }
 
     /*
@@ -70,5 +63,4 @@ public class ApiAccess extends AsyncTask<String, Void, String> {
         super.onPostExecute(result);
     }
     */
-
 }
