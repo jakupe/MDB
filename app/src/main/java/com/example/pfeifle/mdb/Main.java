@@ -1,5 +1,6 @@
 package com.example.pfeifle.mdb;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,13 +27,14 @@ public class Main extends AppCompatActivity {
     private String searchMovieUrl = "https://api.themoviedb.org/3/search/movie?api_key="+apiKey+"&page=1&include_adult=true&language=de&query=";
     private String getDetailsUrl1 = "https://api.themoviedb.org/3/movie/";
     private String getDetailsUrl2 = "?language=de&api_key=" + apiKey;
+    private String noMovieFoudMessage = "Kein Film gefunden!";
 
-    // text and buttons
+    ListView lv;
     EditText movieName;
     Button searchBtn;
-    ListView lv;
 
-    // needed classes
+    Context con = null;
+    JSONObject jo;
     Movie movies[];
 
     @Override
@@ -40,10 +42,12 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // init Text und Buttons
+        con = getApplicationContext();
+
+        // init
+        lv = (ListView) findViewById(R.id.listView);
         movieName = (EditText) findViewById(R.id.movieName);
         searchBtn = (Button) findViewById(R.id.searchBtn);
-        lv = (ListView) findViewById(R.id.listView);
 
         searchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -55,10 +59,9 @@ public class Main extends AppCompatActivity {
     }
 
     void searchMovie(View v) {
-        if(!movieName.getText().toString().matches("")) {
+        if(!movieName.getText().toString().matches(""))
             getMovies(movieName.getText().toString());
-            display();
-        } else
+        else
             Toast.makeText(this, "Bitte Filmname eingeben", Toast.LENGTH_SHORT).show();
 
         /*
@@ -74,45 +77,60 @@ public class Main extends AppCompatActivity {
 
         try {
             // get results
-            JSONObject jo = new ApiAccess().execute(searchMovieUrl+name).get();
+            jo = new ApiAccess().execute(searchMovieUrl+name).get();
             String results = jo.getString("results");
             results = results.substring(1);
             results = results.substring(0, results.length() - 1);
-            jo = new JSONObject("{\"res\":["+results+"]}");
 
             // extracting results from data
-            JSONArray ja = jo.getJSONArray("res");
-            int len = ja.length();
-            movies = new Movie[len];
+            JSONArray ja = new JSONObject("{\"res\":["+results+"]}").getJSONArray("res");
+            movies = new Movie[ja.length()];
 
             // loop to split results and get movies
-            for(int i=0; i<len; i++)
-                movies[i] = new Movie(new ApiAccess().execute(getDetailsUrl1
-                        + new JSONObject(ja.getString(i)).getString("id") // get id
-                        + getDetailsUrl2).get());
+            for(int i=0; i<ja.length(); i++) {
+                jo = new JSONObject(ja.getString(i));
+                movies[i] = new Movie(jo.getString("id"), jo.getString("title"));
+            }
         }
         catch (InterruptedException e)  { e.printStackTrace(); }
         catch (ExecutionException e)    { e.printStackTrace(); }
         catch (JSONException e)         { e.printStackTrace(); }
+
+        display();
     }
 
-
     private void display() {
+        // List movie names
         List valueList = new ArrayList<String>();
-        for(int i=0; i<10; i++)
-        valueList.add(movies[i].title);
+        if (movies.length > 0)
+            for (int i=0; i<movies.length; i++)
+                valueList.add(movies[i].title);
+        else
+            valueList.add(noMovieFoudMessage);
 
-        ListAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList);
-
-        lv.setAdapter(adapter);
+        // Show list and make clickable
+        lv.setAdapter(new ArrayAdapter(con, android.R.layout.simple_list_item_1, valueList));
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // TODO details
-
+                detail(i);
             }
         });
 
+    }
+
+    private void detail(int i) {
+        startActivity(new Intent(this, DisplayDetail.class));
+
+        try {
+            // Show details
+            DisplayDetail dd = new DisplayDetail();
+            dd.display(movies[i], new ApiAccess().execute(getDetailsUrl1 + movies[i].id + getDetailsUrl2).get(), con);
+
+            startActivity(new Intent(this, DisplayDetail.class));
+        }
+        catch (InterruptedException e)  { e.printStackTrace(); }
+        catch (ExecutionException e)    { e.printStackTrace(); }
 
     }
 

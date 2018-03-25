@@ -9,13 +9,16 @@ import org.json.JSONObject;
  */
 
 class Movie {
-    protected String id, title, genres="", homepage, originalLanguage, originalTitle, overview,
-            population, releaseDate, runtime, voteAverage, voteCount;
+    protected String id, title, genres="", homepage="", originalLanguage="", originalTitle="", overview="",
+            population="", releaseDate="", runtime="", voteAverage="", voteCount="";
 
-    public Movie(JSONObject jo) {
+    public Movie(String id, String title) {
+            this.id = id;
+            this.title = title;
+    }
+
+    protected void createDetails(JSONObject jo) {
         try {
-            id = jo.getString("id");
-            title = jo.getString("title");
             homepage = jo.getString("homepage");
             originalLanguage = jo.getString("original_language");
             originalTitle = jo.getString("original_title");
@@ -35,15 +38,13 @@ class Movie {
             // extracting genres from data
             JSONArray ja = jo.getJSONArray("gen");
 
-            // loop to split genres and get names
+            // loop to split and get genres
             for(int i= 0; i<ja.length(); i++)
                 genres += new JSONObject(ja.getString(i)).getString("name") + ", ";
 
             genres = genres.substring(0, genres.length() - 2);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+        } catch (JSONException e) { e.printStackTrace(); }
 
+    }
 
 }
