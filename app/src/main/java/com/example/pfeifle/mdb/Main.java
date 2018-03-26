@@ -25,6 +25,8 @@ public class Main extends AppCompatActivity {
     private String getDetailsUrl1 = "https://api.themoviedb.org/3/movie/";
     private String getDetailsUrl2 = "?language=de&api_key=" + apiKey;
     private String noMovieFoudMessage = "Kein Film gefunden!";
+    private String noMovie = "Bitte Filmname eingeben!";
+    private String noNetworkMessage = "Bitte Netzwerkverbindung prüfen!";
 
     private ListView lv;
     private EditText movieName;
@@ -57,7 +59,7 @@ public class Main extends AppCompatActivity {
         if(!movieName.getText().toString().matches(""))
             getMovies(movieName.getText().toString());
         else
-            Toast.makeText(this, "Bitte Filmname eingeben", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, noMovie, Toast.LENGTH_SHORT).show();
     }
 
     private void getMovies(String name) {
@@ -67,6 +69,10 @@ public class Main extends AppCompatActivity {
         try {
             // get results
             jo = new ApiAccess().execute(searchMovieUrl+name).get();
+            if (jo == null) {
+                Toast.makeText(this, noNetworkMessage, Toast.LENGTH_SHORT).show();
+                return;
+            }
             String results = jo.getString("results");
             results = results.substring(1);
             results = results.substring(0, results.length() - 1);
@@ -110,7 +116,12 @@ public class Main extends AppCompatActivity {
 
     private void detail(int i) {
         try {
-            new Buffer(movies[i], new ApiAccess().execute(getDetailsUrl1+movies[i].id+getDetailsUrl2).get());
+            jo= new ApiAccess().execute(getDetailsUrl1+movies[i].id+getDetailsUrl2).get();
+            if (jo == null) {
+                Toast.makeText(this, noNetworkMessage, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            new Buffer(movies[i], jo);
             startActivity(new Intent(this, DisplayDetail.class));
         }
         catch (InterruptedException e)  { e.printStackTrace(); }
