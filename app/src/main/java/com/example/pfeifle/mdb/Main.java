@@ -1,16 +1,13 @@
 package com.example.pfeifle.mdb;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,26 +26,24 @@ public class Main extends AppCompatActivity {
     private String getDetailsUrl2 = "?language=de&api_key=" + apiKey;
     private String noMovieFoudMessage = "Kein Film gefunden!";
 
-    ListView lv;
-    EditText movieName;
-    Button searchBtn;
+    private ListView lv;
+    private EditText movieName;
+    private Button searchBtn;
 
-    Context con = null;
-    JSONObject jo;
-    Movie movies[];
+    private JSONObject jo;
+    private Movie movies[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        con = getApplicationContext();
-
         // init
         lv = (ListView) findViewById(R.id.listView);
         movieName = (EditText) findViewById(R.id.movieName);
         searchBtn = (Button) findViewById(R.id.searchBtn);
 
+        // Add Onclick Listener
         searchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -63,12 +58,6 @@ public class Main extends AppCompatActivity {
             getMovies(movieName.getText().toString());
         else
             Toast.makeText(this, "Bitte Filmname eingeben", Toast.LENGTH_SHORT).show();
-
-        /*
-        for (int i=0; i<movies.length; i++)
-            Log.i("MDB", "movie Name= "+movies[i].title);
-        */
-
     }
 
     private void getMovies(String name) {
@@ -109,7 +98,7 @@ public class Main extends AppCompatActivity {
             valueList.add(noMovieFoudMessage);
 
         // Show list and make clickable
-        lv.setAdapter(new ArrayAdapter(con, android.R.layout.simple_list_item_1, valueList));
+        lv.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -120,13 +109,8 @@ public class Main extends AppCompatActivity {
     }
 
     private void detail(int i) {
-        startActivity(new Intent(this, DisplayDetail.class));
-
         try {
-            // Show details
-            DisplayDetail dd = new DisplayDetail();
-            dd.display(movies[i], new ApiAccess().execute(getDetailsUrl1 + movies[i].id + getDetailsUrl2).get(), con);
-
+            new Buffer(movies[i], new ApiAccess().execute(getDetailsUrl1+movies[i].id+getDetailsUrl2).get());
             startActivity(new Intent(this, DisplayDetail.class));
         }
         catch (InterruptedException e)  { e.printStackTrace(); }

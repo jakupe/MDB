@@ -19,15 +19,15 @@ class Movie {
 
     protected void createDetails(JSONObject jo) {
         try {
-            homepage = jo.getString("homepage");
-            originalLanguage = jo.getString("original_language");
-            originalTitle = jo.getString("original_title");
-            overview = jo.getString("overview");
-            population = jo.getString("popularity");
-            releaseDate = jo.getString("release_date");
-            runtime = jo.getString("runtime");
-            voteAverage = jo.getString("vote_average");
-            voteCount = jo.getString("vote_count");
+            homepage            = jo.getString("homepage");
+            originalLanguage    = jo.getString("original_language");
+            originalTitle       = jo.getString("original_title");
+            overview            = jo.getString("overview");
+            population          = jo.getString("popularity");
+            releaseDate         = jo.getString("release_date");
+            runtime             = jo.getString("runtime");
+            voteAverage         = jo.getString("vote_average");
+            voteCount           = jo.getString("vote_count");
 
             // Get genres
             String gen = jo.getString("genres");

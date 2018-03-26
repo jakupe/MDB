@@ -1,13 +1,11 @@
 package com.example.pfeifle.mdb;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +16,7 @@ import java.util.List;
 
 public class DisplayDetail extends AppCompatActivity {
     private ListView lv;
+    private Button saveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,33 +24,52 @@ public class DisplayDetail extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         lv = (ListView) findViewById(R.id.detailView);
+        saveBtn = (Button) findViewById(R.id.addToWatchList);
+
+        // Add Onclick Listener
+        saveBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO
+            }
+        });
+        display();
 
     }
 
-    protected void display(Movie m, JSONObject jo, Context appCon) {
-        m.createDetails(jo);
+    protected void display() {
+        // get Movie Data
+        Movie m = Buffer.getMovie();
 
+        // Create List
         List valueList = new ArrayList<String>();
-        Log.i("MDB", "title= "+m.title);
-        Log.i("MDB", "genres= "+m.genres);
-        Log.i("MDB", "overview= "+m.overview);
 
-        valueList.add("Title \n"        + m.title);
-        valueList.add("Genres \n"       + m.genres);
-        //valueList.add("Overview \n"     + m.overview);
-        //valueList.add("Homepage \n"     + m.homepage);
-        //valueList.add("Runtime \n"      + m.runtime);
-        //valueList.add("Release Date \n" + m.releaseDate);
-        //valueList.add("Population \n"   + m.population);
-        //valueList.add("Vote \n"         + m.voteAverage);
-        //valueList.add("Vote Count \n"   + m.voteCount);
-        //valueList.add("Original Language \n"    + m.originalLanguage);
-        //valueList.add("Original Title \n"       + m.originalTitle);
+        // Add Text to List
+        if(!m.title.matches(""))
+            valueList.add("Title \n"        + m.title);
+        if(!m.genres.matches(""))
+            valueList.add("Genres \n"       + m.genres);
+        if(!m.overview.matches(""))
+            valueList.add("Overview \n"     + m.overview);
+        if(!m.homepage.matches(""))
+            valueList.add("Homepage \n"     + m.homepage);
+        if(!m.runtime.matches(""))
+            valueList.add("Runtime \n"      + m.runtime + " Minutes");
+        if(!m.releaseDate.matches(""))
+            valueList.add("Release Date \n" + m.releaseDate);
+        if(!m.population.matches(""))
+            valueList.add("Population \n"   + m.population);
+        if(!m.voteAverage.matches(""))
+            valueList.add("Vote \n"         + m.voteAverage + " / 10");
+        if(!m.voteCount.matches(""))
+            valueList.add("Vote Count \n"   + m.voteCount);
+        if(!m.originalLanguage.matches(""))
+            valueList.add("Original Language \n"    + m.originalLanguage);
+        if(!m.originalTitle.matches(""))
+            valueList.add("Original Title \n"       + m.originalTitle);
 
         // Show list
-        Log.i("MDB", "appC: \n"+appCon);
-        Log.i("MDB", "appC: \n"+lv);
-        //lv.setAdapter(new ArrayAdapter(appCon, android.R.layout.simple_list_item_1, valueList));
+        lv.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
 
 
     }

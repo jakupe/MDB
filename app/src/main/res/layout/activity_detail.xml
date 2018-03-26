@@ -6,10 +6,25 @@
     android:layout_height="match_parent"
     tools:context="com.example.pfeifle.mdb.DisplayDetail">
 
-    <ListView
-        android:id="@+id/detailView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/addToWatchList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Film speichern" />
+
+        <ListView
+            android:id="@+id/detailView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" >
+
+        </ListView>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
