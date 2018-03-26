@@ -26,28 +26,28 @@ class Movie {
     @ColumnInfo(name = "homepage")
     private String homepage = "";
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "originalLanguage")
     private String originalLanguage = "";
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "originalTitle")
     private String originalTitle = "";
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "overview")
     private String overview = "";
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "population")
     private String population = "";
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "releaseDate")
     private String releaseDate = "";
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "runtime")
     private String runtime = "";
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "voteAverage")
     private String voteAverage = "";
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "voteCount")
     private String voteCount = "";
 
     public Movie(String id, String title) {
