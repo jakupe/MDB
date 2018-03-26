@@ -99,7 +99,7 @@ public class Main extends AppCompatActivity {
         List valueList = new ArrayList<String>();
         if (movies.length > 0)
             for (int i=0; i<movies.length; i++)
-                valueList.add(movies[i].title);
+                valueList.add(movies[i].getTitle());
         else
             valueList.add(noMovieFoudMessage);
 
@@ -116,7 +116,7 @@ public class Main extends AppCompatActivity {
 
     private void detail(int i) {
         try {
-            jo= new ApiAccess().execute(getDetailsUrl1+movies[i].id+getDetailsUrl2).get();
+            jo= new ApiAccess().execute(getDetailsUrl1+movies[i].getId()+getDetailsUrl2).get();
             if (jo == null) {
                 Toast.makeText(this, noNetworkMessage, Toast.LENGTH_SHORT).show();
                 return;

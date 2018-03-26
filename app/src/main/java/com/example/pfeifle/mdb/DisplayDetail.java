@@ -45,28 +45,28 @@ public class DisplayDetail extends AppCompatActivity {
         List valueList = new ArrayList<String>();
 
         // Add Text to List
-        if(!m.title.matches(""))
-            valueList.add("Title \n"        + m.title);
-        if(!m.genres.matches(""))
-            valueList.add("Genres \n"       + m.genres);
-        if(!m.overview.matches(""))
-            valueList.add("Overview \n"     + m.overview);
-        if(!m.homepage.matches(""))
-            valueList.add("Homepage \n"     + m.homepage);
-        if(!m.runtime.matches(""))
-            valueList.add("Runtime \n"      + m.runtime + " Minutes");
-        if(!m.releaseDate.matches(""))
-            valueList.add("Release Date \n" + m.releaseDate);
-        if(!m.population.matches(""))
-            valueList.add("Population \n"   + m.population);
-        if(!m.voteAverage.matches(""))
-            valueList.add("Vote \n"         + m.voteAverage + " / 10");
-        if(!m.voteCount.matches(""))
-            valueList.add("Vote Count \n"   + m.voteCount);
-        if(!m.originalLanguage.matches(""))
-            valueList.add("Original Language \n"    + m.originalLanguage);
-        if(!m.originalTitle.matches(""))
-            valueList.add("Original Title \n"       + m.originalTitle);
+        if(!m.getTitle().matches(""))
+            valueList.add("Title \n"        + m.getTitle());
+        if(!m.getGenres().matches(""))
+            valueList.add("Genres \n"       + m.getGenres());
+        if(!m.getOverview().matches(""))
+            valueList.add("Overview \n"     + m.getOverview());
+        if(!m.getHomepage().matches(""))
+            valueList.add("Homepage \n"     + m.getHomepage());
+        if(!m.getRuntime().matches(""))
+            valueList.add("Runtime \n"      + m.getRuntime() + " Minutes");
+        if(!m.getReleaseDate().matches(""))
+            valueList.add("Release Date \n" + m.getReleaseDate());
+        if(!m.getPopulation().matches(""))
+            valueList.add("Population \n"   + m.getPopulation());
+        if(!m.getVoteAverage().matches(""))
+            valueList.add("Vote \n"         + m.getVoteAverage() + " / 10");
+        if(!m.getVoteCount().matches(""))
+            valueList.add("Vote Count \n"   + m.getVoteCount());
+        if(!m.getOriginalLanguage().matches(""))
+            valueList.add("Original Language \n"    + m.getOriginalLanguage());
+        if(!m.getOriginalTitle().matches(""))
+            valueList.add("Original Title \n"       + m.getOriginalTitle());
 
         // Show list
         lv.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
