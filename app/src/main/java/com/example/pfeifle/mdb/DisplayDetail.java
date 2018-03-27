@@ -23,8 +23,8 @@ public class DisplayDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        lv = (ListView) findViewById(R.id.detailView);
-        saveBtn = (Button) findViewById(R.id.addToWatchList);
+        lv      = (ListView) findViewById(R.id.detailView);
+        saveBtn = (Button)   findViewById(R.id.addToWatchList);
 
         // Add Onclick Listener
         saveBtn.setOnClickListener(new View.OnClickListener(){
@@ -70,7 +70,6 @@ public class DisplayDetail extends AppCompatActivity {
 
         // Show list
         lv.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
-
 
     }
 

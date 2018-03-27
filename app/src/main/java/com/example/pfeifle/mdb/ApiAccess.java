@@ -1,6 +1,8 @@
 package com.example.pfeifle.mdb;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
@@ -19,11 +21,15 @@ import java.io.IOException;
  */
 
 public class ApiAccess extends AsyncTask<String, Void, JSONObject> {
+    private JSONObject jo = null;
+    public ApiResponse ar = null;
+
+    public ApiAccess(ApiResponse ar) {
+        this.ar = ar;
+    }
 
     @Override
     protected JSONObject doInBackground(String... strings) {
-        JSONObject jo = null;
-
         try {
             // get Request-Factory
             HttpTransport ht = new NetHttpTransport();
@@ -41,27 +47,15 @@ public class ApiAccess extends AsyncTask<String, Void, JSONObject> {
 
             // parse JSON
             jo = new JSONObject(js);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
+        catch (IOException e)   { e.printStackTrace(); }
+        catch (JSONException e) { e.printStackTrace(); }
         return jo;
     }
 
     @Override
-    protected void onPostExecute(JSONObject jo){
-        super.onPostExecute(jo);
+    protected void onPostExecute(JSONObject jo) {
+        ar.finish(jo);
     }
 
-    /*
-    protected void onProgressUpdate(Integer... progress) {
-        setProgressPercent(progress[0]);
-    }
-
-    protected void onPostExecute(Long result) {
-        super.onPostExecute(result);
-    }
-    */
 }
