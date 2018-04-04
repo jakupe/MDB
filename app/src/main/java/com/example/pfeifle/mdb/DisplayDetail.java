@@ -1,5 +1,6 @@
 package com.example.pfeifle.mdb;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,20 +18,30 @@ import java.util.List;
 public class DisplayDetail extends AppCompatActivity {
     private ListView lv;
     private Button saveBtn;
+    private String extra = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        Intent intent = getIntent();
+        extra = intent.getStringExtra("extraData");
+
         lv      = (ListView) findViewById(R.id.detailView);
         saveBtn = (Button)   findViewById(R.id.addToWatchList);
+        // TODO Btn ändern
+        if(extra.equals("watchlist")) {
+            saveBtn.setText("Film löschen");
+        }
 
-        // Add Onclick Listener
+        // Add Onclick Listener for save btn
         saveBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // TODO
+                //Main.di.addMovie();
+                new DatabaseInitializer().addMovie();
             }
         });
         display();

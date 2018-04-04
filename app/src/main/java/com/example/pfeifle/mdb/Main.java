@@ -1,6 +1,11 @@
 package com.example.pfeifle.mdb;
 
+import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,21 +35,35 @@ public class Main extends AppCompatActivity {
     private ListView lv;
     private EditText movieName;
     private Button searchBtn;
+    private Button watchlistBtn;
+
 
     private int idIs = 0;
     private Movie movies[];
     private ApiResponse ar = null;
     private ApiAccess aa = null;
+    //public static DatabaseInitializer di;
+	public static MovieDatabase mdb;
+
+    //public static Main INSTANCE;
+    private static Context context;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         // init
         lv        = (ListView) findViewById(R.id.listView);
         movieName = (EditText) findViewById(R.id.movieName);
         searchBtn = (Button)   findViewById(R.id.searchBtn);
+        watchlistBtn = (Button) findViewById(R.id.watchlistBtn);
 
         apiRes();
 
@@ -55,6 +74,30 @@ public class Main extends AppCompatActivity {
                 searchMovie(v);
             }
         });
+
+        // Add Onclick Listener for Watchlist Btn
+        watchlistBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // new watchlist activity
+                startActivity(new Intent(Main.this, Watchlist.class));
+            }
+        });
+
+        DbAsyncTask dbat = new DbAsyncTask();
+        dbat.execute();
+
+
+        // create database
+        //database = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, DATABASE_NAME).addMigrations(MovieDatabase.MIGRATION_1_2).build();
+
+        //INSTANCE = this;
+
+        // create Db
+        //di = new DatabaseInitializer(Main.get().getDB());
+
+        Main.context = getApplicationContext();
+
    }
 
     void searchMovie(View v) {
@@ -92,7 +135,10 @@ public class Main extends AppCompatActivity {
     private void detailFinish(JSONObject jo) {
         // clicked for more details
         new Buffer(movies[idIs], jo);
-        startActivity(new Intent(this, DisplayDetail.class));
+        Intent intent = new Intent(this, DisplayDetail.class);
+        intent.putExtra("extraData", "main");
+        startActivity(intent);
+        //startActivity(new Intent(this, DisplayDetail.class));
     }
 
     private void fail() {
@@ -135,5 +181,48 @@ public class Main extends AppCompatActivity {
             }
         };
     }
+	
+	
+	    public class DbAsyncTask extends AsyncTask<Void, Void, MovieDatabase> {
+
+
+        @Override
+        protected MovieDatabase doInBackground(Void... params) {
+
+            MovieDatabase db;
+
+            final String DATABASE_NAME = "MovieDatabase";
+
+
+            db = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, DATABASE_NAME).build();
+
+            return db;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(MovieDatabase db) {
+
+
+mdb = db;
+
+        }
+
+
+
+
+
+
+
+    }
+
+
+    protected static Context getMainContext() {
+        return Main.context;
+    }
+
+
+
 
 }

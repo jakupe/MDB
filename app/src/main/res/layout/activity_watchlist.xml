@@ -4,38 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pfeifle.mdb.Main">
+    tools:context="com.example.pfeifle.mdb.Watchlist">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/movieName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Filmname"
-            android:inputType="textPersonName" />
-
         <Button
-            android:id="@+id/searchBtn"
+            android:id="@+id/deleteAllBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Suchen" />
-
-        <Button
-            android:id="@+id/watchlistBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Watchliste" />
+            android:text="Alles löschen" />
 
         <ListView
-            android:id="@+id/listView"
+            android:id="@+id/listViewWatchlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
