@@ -80,8 +80,6 @@ public class Main extends AppCompatActivity {
         DbAsyncTask dbat = new DbAsyncTask();
         dbat.execute();
 
-
-
         Main.context = getApplicationContext();
 
    }

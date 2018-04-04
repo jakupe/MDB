@@ -41,7 +41,7 @@ public class DatabaseInitializer  {
         //Main.getMainContext().startActivity(i);
     }
 
-    protected void addMovie()   {
+    protected void addMovie() {
         task.execute("push");
     }
 
