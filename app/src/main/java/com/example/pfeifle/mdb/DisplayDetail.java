@@ -44,6 +44,7 @@ public class DisplayDetail extends AppCompatActivity {
 
                 if(extra.equals("watchlist")){
                     new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId());
+                    finish();
                 } else {
                     new DatabaseInitializer().addMovie();
                 }
