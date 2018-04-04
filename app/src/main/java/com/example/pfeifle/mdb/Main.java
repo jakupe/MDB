@@ -81,8 +81,7 @@ public class Main extends AppCompatActivity {
         DbAsyncTask dbat = new DbAsyncTask();
         dbat.execute();
 
-        // Load saved movies from database
-        new DatabaseInitializer().fillBuffer();
+
 
         Main.context = getApplicationContext();
 
@@ -194,6 +193,8 @@ public class Main extends AppCompatActivity {
 
 
 mdb = db;
+// Load saved movies from database
+            new DatabaseInitializer().fillBuffer();
 
         }
 

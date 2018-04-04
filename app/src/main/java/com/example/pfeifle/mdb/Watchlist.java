@@ -3,6 +3,7 @@ package com.example.pfeifle.mdb;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ public class Watchlist extends AppCompatActivity {
     private List<Movie> ml = null;
     private String noMovieSaved = "Es wurde noch kein Film gespeichert";
     private int idIs = 0;
+    protected static boolean ready;
 
 
     @Override
@@ -33,7 +35,12 @@ public class Watchlist extends AppCompatActivity {
         deleteAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ready = false;
                 new DatabaseInitializer().deleteAllMovies();
+                Log.i("DB_DEL", "ready = "+ready);
+                while (!ready);
+                Log.i("DB_DEL", "weiter");
+                display();
                 //Main.di.deleteAllMovies();
             }
         });
@@ -43,26 +50,29 @@ public class Watchlist extends AppCompatActivity {
 
     //TODO implement listView with movies from db
 
-    private void display() {
-        if (Buffer.getMovieList() == null)
+    protected void display() {
+        if (Buffer.getMovieList() == null) {
             //TODO: Error ausgeben
+        } else {
 
-        ml = Buffer.getMovieList();
-        List valueList = new ArrayList<String>();
-        if (ml.size() > 0)
-            for (int i=0; i<ml.size(); i++)
-                valueList.add(ml.get(i).getTitle().toString());
-        else
-            valueList.add(noMovieSaved);
+            ml = Buffer.getMovieList();
+            List valueList = new ArrayList<String>();
+            if (ml.size() > 0)
+                for (int i = 0; i < ml.size(); i++)
+                    valueList.add(ml.get(i).getTitle().toString());
+            else
+                valueList.add(noMovieSaved);
 
-        listViewWatchlist.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
-        listViewWatchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                idIs = i;
-                detail();
-            }
-        });
+            listViewWatchlist.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
+            listViewWatchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    idIs = i;
+                    detail();
+                }
+            });
+
+        }
 
     }
 
@@ -72,5 +82,7 @@ public class Watchlist extends AppCompatActivity {
         intent.putExtra("extraData", "watchlist");
         startActivity(intent);
     }
+
+
 
 }

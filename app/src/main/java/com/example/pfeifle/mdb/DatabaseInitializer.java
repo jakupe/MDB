@@ -16,6 +16,7 @@ public class DatabaseInitializer  {
     private PopulateDbAsync task;
     private MovieDatabase mDb = null;
     private DbAccess dba = null;
+    private Watchlist wl = null;
 
     //protected static MovieDatabase database;
 
@@ -43,9 +44,11 @@ public class DatabaseInitializer  {
 
     protected void finishDbAccess(List<Movie> movieList) {
         new Buffer(movieList);
+        Watchlist.ready = true;
+
         //Context c = new Main().getMainContext();
-        Intent i = new Intent(new Intent(Main.getMainContext(), Watchlist.class));
-        Main.getMainContext().startActivity(i);
+        //Intent i = new Intent(new Intent(Main.getMainContext(), Watchlist.class));
+        //Main.getMainContext().startActivity(i);
     }
 
     protected void addMovie()   {
@@ -66,6 +69,7 @@ public class DatabaseInitializer  {
     private class PopulateDbAsync extends AsyncTask<String, Void, List<Movie>> {
         public DbAccess dba;
         private Movie m = null;
+        private List<Movie> mlist;
 
         public PopulateDbAsync(DbAccess dba) {
             this.dba = dba;
@@ -85,17 +89,16 @@ public class DatabaseInitializer  {
             switch(input) {
                 case "push":
                     Log.i("DB", "PUSH");
-                    List<Movie> mlist = db.movieDao().getAll();
+                    mlist = db.movieDao().getAll();
                     m = Buffer.getMovie();
                     boolean same = false;
-                    for(int i=0; i<mlist.size(); i++)
-                        if (m.getId().equals(mlist.get(i).getId())) {
+                    for(int j=0; j<mlist.size(); j++)
+                        if (m.getId().equals(mlist.get(j).getId())) {
                             same = true;
                             break;
                         }
                     if(!same)
                         db.movieDao().insert(m);
-
                     break;
 
                 case "delete":
@@ -111,8 +114,14 @@ public class DatabaseInitializer  {
 
                 default:
             }
-            db.movieDao();
-            return db.movieDao().getAll();
+
+
+            if (db.movieDao().getAll()==null){
+                mlist.add(new Movie("0", "Kein Film vorhanden"));
+            } else{
+                mlist = db.movieDao().getAll();
+            }
+            return mlist;
         }
 
         @Override
