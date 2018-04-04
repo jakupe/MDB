@@ -1,18 +1,11 @@
 package com.example.pfeifle.mdb;
 
-import android.app.Activity;
-import android.arch.persistence.room.Room;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.util.List;
-
-import static android.support.v4.content.ContextCompat.startActivity;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Foecking on 28.03.2018.
@@ -20,7 +13,7 @@ import static android.support.v4.content.ContextCompat.startActivity;
 
 public class DatabaseInitializer  {
 
-    private PopulateDbAsync task = null;
+    private PopulateDbAsync task;
     private MovieDatabase mDb = null;
     private DbAccess dba = null;
 
@@ -34,9 +27,9 @@ public class DatabaseInitializer  {
 
 
 
-    public DatabaseInitializer(/*MovieDatabase db*/) {
+    public DatabaseInitializer() {
         finDba();
-        task = new PopulateDbAsync(/*db,*/ dba);
+        task = new PopulateDbAsync(dba);
     }
 
     private void finDba() {
@@ -61,19 +54,20 @@ public class DatabaseInitializer  {
 
     protected void deleteMovie() { task.execute("delete"); }
 
-    protected void deleteAllMovies()    {
+    protected void deleteAllMovies() {
         task.execute("deleteAll");
     }
 
+    protected void fillBuffer() {
+        task.execute("");
+    }
 
 
     private class PopulateDbAsync extends AsyncTask<String, Void, List<Movie>> {
-        public DbAccess dba = null;
-        private List<Movie> movies = null;
+        public DbAccess dba;
         private Movie m = null;
 
-        public PopulateDbAsync(/*MovieDatabase db,*/ DbAccess dba) {
-            //mDb = db;
+        public PopulateDbAsync(DbAccess dba) {
             this.dba = dba;
         }
 
@@ -83,45 +77,42 @@ public class DatabaseInitializer  {
 
             String input = params[0];
             int id=0;
-            if(params.length>1) {
+            if(params.length > 1) {
                 String sid = params[1];
                 id = Integer.parseInt(sid);
             }
 
             switch(input) {
                 case "push":
-List<Movie> mlist = db.movieDao().getAll();
+                    Log.i("DB", "PUSH");
+                    List<Movie> mlist = db.movieDao().getAll();
                     m = Buffer.getMovie();
                     boolean same = false;
-                    for(int i=0; i<mlist.size(); i++) {
-
-                            if (m.getId().equals(mlist.get(i).getId())) {
-                                same = true;
-                                break;
-                            }
-
-                    }
-
-
-                    if(same=false) {
+                    for(int i=0; i<mlist.size(); i++)
+                        if (m.getId().equals(mlist.get(i).getId())) {
+                            same = true;
+                            break;
+                        }
+                    if(!same)
                         db.movieDao().insert(m);
-                    }
+
                     break;
+
                 case "delete":
+                    Log.i("DB", "DELETE");
                     m = mDb.movieDao().findById(id);
                     db.movieDao().delete(m);
                     break;
+
                 case "deleteAll":
+                    Log.i("DB", "DELETE ALL");
                     db.movieDao().deleteAll();
                     break;
+
                 default:
             }
-            movies = db.movieDao().getAll();
-            /*if(movies.size()==0)    {
-                movies.add(new Movie("0", "kein Film vorhanden"));
-            }*/
-            //Log.i("First movie name", movies.get(0).getTitle());
-            return movies;
+            db.movieDao();
+            return db.movieDao().getAll();
         }
 
         @Override

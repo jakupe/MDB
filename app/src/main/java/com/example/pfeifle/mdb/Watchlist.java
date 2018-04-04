@@ -12,8 +12,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Watchlist extends AppCompatActivity {
 
     private ListView listViewWatchlist;
@@ -28,8 +26,8 @@ public class Watchlist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watchlist);
 
-        listViewWatchlist = (ListView) findViewById(R.id.listViewWatchlist);
-        deleteAllBtn      = (Button)   findViewById(R.id.deleteAllBtn);
+        listViewWatchlist = findViewById(R.id.listViewWatchlist);
+        deleteAllBtn      = findViewById(R.id.deleteAllBtn);
 
         // Onclick listener for delete btn
         deleteAllBtn.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +44,9 @@ public class Watchlist extends AppCompatActivity {
     //TODO implement listView with movies from db
 
     private void display() {
+        if (Buffer.getMovieList() == null)
+            //TODO: Error ausgeben
+
         ml = Buffer.getMovieList();
         List valueList = new ArrayList<String>();
         if (ml.size() > 0)

@@ -47,15 +47,10 @@ public class Main extends AppCompatActivity {
     private static Context context;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         // init
         lv              = findViewById(R.id.listView);
@@ -82,17 +77,12 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        // create database
         DbAsyncTask dbat = new DbAsyncTask();
         dbat.execute();
 
-
-        // create database
-        //database = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, DATABASE_NAME).addMigrations(MovieDatabase.MIGRATION_1_2).build();
-
-        //INSTANCE = this;
-
-        // create Db
-        //di = new DatabaseInitializer(Main.get().getDB());
+        // Load saved movies from database
+        new DatabaseInitializer().fillBuffer();
 
         Main.context = getApplicationContext();
 

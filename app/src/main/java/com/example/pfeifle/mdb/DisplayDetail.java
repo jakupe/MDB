@@ -30,7 +30,7 @@ public class DisplayDetail extends AppCompatActivity {
         extra = intent.getStringExtra("extraData");
 
         // TODO: View
-        //lv      = findViewById(R.id.detailView);
+        lv      = findViewById(R.id.detailView);
         saveBtn = findViewById(R.id.addToWatchList);
         // TODO Btn ändern
         if(extra.equals("watchlist")) {
