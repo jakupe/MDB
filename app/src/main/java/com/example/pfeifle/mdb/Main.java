@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends AppCompatActivity {
-    private String apiKey = "0e81ea650bb87e98021985bb7e90350d", searchMovieUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + apiKey + "&page=1&include_adult=true&language=de&query=", getDetailsUrl1 = "https://api.themoviedb.org/3/movie/", getDetailsUrl2 = "?language=de&api_key=" + apiKey, noMovieFoudMsg = "Kein Film gefunden!", noMovieMsg = "Bitte Filmname eingeben!", networkErrorMsg = "Bitte Netzwerkverbindung prüfen!";
+    private String apiKey = "0e81ea650bb87e98021985bb7e90350d", searchMovieUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + apiKey + "&page=1&include_adult=true&language=de&query=", getDetailsUrl1 = "https://api.themoviedb.org/3/movie/", getDetailsUrl2 = "?language=de&api_key=" + apiKey;
 
     private ListView lv;
     private EditText movieName;
@@ -82,7 +82,7 @@ public class Main extends AppCompatActivity {
         if (!movieName.getText().toString().matches(""))
             aa.execute(searchMovieUrl + movieName.getText().toString());
         else
-            Toast.makeText(this, noMovieMsg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.noMovieMsg), Toast.LENGTH_SHORT).show();
     }
 
     private void listFinish(JSONObject jo) {
@@ -121,7 +121,7 @@ public class Main extends AppCompatActivity {
 
     private void fail() {
         // Error if JSON is null
-        Toast.makeText(this, networkErrorMsg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.networkErrorMsg), Toast.LENGTH_SHORT).show();
     }
 
     private void display() {
@@ -131,7 +131,7 @@ public class Main extends AppCompatActivity {
             for (int i = 0; i < movies.length; i++)
                 valueList.add(movies[i].getTitle());
         else
-            valueList.add(noMovieFoudMsg);
+            valueList.add(getString(R.string.noMovieFoundMsg));
 
         // Show list and make clickable
         lv.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));

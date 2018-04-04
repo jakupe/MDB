@@ -6,5 +6,8 @@
     <string name="deleteall_btn">Alles löschen!</string>
     <string name="addmovie_btn">Film hinzufügen</string>
     <string name="deletemovie_btn">Film löschen!</string>
+    <string name="noMovieMsg">Bitte Filmname eingeben!</string>
+    <string name="noMovieFoundMsg">Kein Film gefunden!</string>
+    <string name="networkErrorMsg">Bitte Netzwerkverbindung prüfen!</string>
 
 </resources>
