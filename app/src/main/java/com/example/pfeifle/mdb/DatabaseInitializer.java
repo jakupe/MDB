@@ -45,7 +45,7 @@ public class DatabaseInitializer  {
         task.execute("push");
     }
 
-    protected void deleteMovie() { task.execute("delete"); }
+    protected void deleteMovie(String id) { task.execute("delete", id); }
 
     protected void deleteAllMovies() {
         task.execute("deleteAll");
@@ -93,7 +93,7 @@ public class DatabaseInitializer  {
 
                 case "delete":
                     Log.i("DB", "DELETE");
-                    m = mDb.movieDao().findById(id);
+                    m = db.movieDao().findById(id);
                     db.movieDao().delete(m);
                     break;
 

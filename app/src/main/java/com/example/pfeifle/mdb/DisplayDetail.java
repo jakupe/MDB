@@ -41,7 +41,12 @@ public class DisplayDetail extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                new DatabaseInitializer().addMovie();
+
+                if(extra.equals("watchlist")){
+                    new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId());
+                } else {
+                    new DatabaseInitializer().addMovie();
+                }
             }
         });
         display();
