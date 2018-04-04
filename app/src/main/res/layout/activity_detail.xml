@@ -27,7 +27,7 @@
             android:layout_weight="0.75"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Name"
+            android:text="@string/view_name"
             android:textColor="#696969"
             android:textSize="10dp" />
 
@@ -39,7 +39,7 @@
             android:layout_weight="0.25"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Laufzeit"
+            android:text="@string/view_time"
             android:textColor="#696969"
             android:textSize="10dp" />
     </LinearLayout>
@@ -100,10 +100,10 @@
             android:id="@+id/originalNameCoded"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:layout_weight="0.55"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Originalname"
+            android:text="@string/view_origname"
             android:textColor="#696969"
             android:textSize="10dp" />
 
@@ -112,10 +112,10 @@
             android:id="@+id/languageCoded"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Lang."
+            android:text="@string/view_language"
             android:textColor="#696969"
             android:textSize="10dp" />
 
@@ -127,7 +127,7 @@
             android:layout_weight="0.25"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Jahr"
+            android:text="@string/view_year"
             android:textColor="#696969"
             android:textSize="10dp" />
     </LinearLayout>
@@ -150,7 +150,7 @@
             android:id="@+id/originalName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:layout_weight="0.55"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:paddingBottom="10dip"
@@ -162,7 +162,7 @@
             android:id="@+id/language"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:paddingBottom="10dip"
@@ -200,10 +200,10 @@
             android:id="@+id/voteCoded"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:layout_weight="0.55"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Bewertung"
+            android:text="@string/view_rating"
             android:textColor="#696969"
             android:textSize="10dp" />
 
@@ -212,10 +212,10 @@
             android:id="@+id/countCoded"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Anahl"
+            android:text="@string/view_count"
             android:textColor="#696969"
             android:textSize="10dp" />
 
@@ -227,7 +227,7 @@
             android:layout_weight="0.25"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Besucherzahl"
+            android:text="@string/view_population"
             android:textColor="#696969"
             android:textSize="10dp" />
     </LinearLayout>
@@ -250,7 +250,7 @@
             android:id="@+id/vote"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:layout_weight="0.55"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:paddingBottom="10dip"
@@ -262,7 +262,7 @@
             android:id="@+id/count"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:paddingBottom="10dip"
@@ -303,7 +303,7 @@
             android:layout_weight="1"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Genres"
+            android:text="@string/view_genre"
             android:textColor="#696969"
             android:textSize="10dp" />
     </LinearLayout>
@@ -355,7 +355,7 @@
             android:layout_weight="1"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
-            android:text="Übersicht"
+            android:text="@string/view_overview"
             android:textColor="#696969"
             android:textSize="10dp" />
     </LinearLayout>

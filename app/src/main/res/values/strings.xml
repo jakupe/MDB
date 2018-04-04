@@ -11,5 +11,14 @@
     <string name="networkErrorMsg">Bitte Netzwerkverbindung prüfen!</string>
     <string name="noMovieSaved">Es wurde noch kein Film gespeichert</string>
     <string name="noDetails">Keine Filmdetails vorhanden!</string>
-
+    <string name="view_name">Name</string>
+    <string name="view_time">Laufzeit</string>
+    <string name="view_origname">Originalname</string>
+    <string name="view_language">Sprache</string>
+    <string name="view_year">Jahr</string>
+    <string name="view_rating">Bewertung</string>
+    <string name="view_count">Anzahl</string>
+    <string name="view_population">Besucherzahl</string>
+    <string name="view_genre">Genres</string>
+    <string name="view_overview">Übersicht</string>
 </resources>
