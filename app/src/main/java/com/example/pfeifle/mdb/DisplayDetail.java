@@ -33,15 +33,14 @@ public class DisplayDetail extends AppCompatActivity {
         lv      = findViewById(R.id.detailView);
         saveBtn = findViewById(R.id.addToWatchList);
         // TODO Btn ändern
-        if(extra.equals("watchlist")) {
+        if(extra.equals("watchlist"))
             saveBtn.setText("Film löschen");
-        }
+
 
         // Add Onclick Listener for save btn
         saveBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //Main.di.addMovie();
                 new DatabaseInitializer().addMovie();
             }
         });

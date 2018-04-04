@@ -53,10 +53,10 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // init
-        lv              = findViewById(R.id.listView);
-        movieName       = findViewById(R.id.movieName);
-        searchBtn       = findViewById(R.id.searchBtn);
-        watchlistBtn    = findViewById(R.id.watchlistBtn);
+        lv           = findViewById(R.id.listView);
+        movieName    = findViewById(R.id.movieName);
+        searchBtn    = findViewById(R.id.searchBtn);
+        watchlistBtn = findViewById(R.id.watchlistBtn);
 
         apiRes();
 
