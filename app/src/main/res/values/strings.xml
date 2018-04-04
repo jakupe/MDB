@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MDB</string>
+    <string name="hint_text">Filmname</string>
+    <string name="search_btn">Suchen</string>
+    <string name="watchlist_btn">Watchlist</string>
+    <string name="deleteall_btn">Alles löschen!</string>
+    <string name="addmovie_btn">Film hinzufügen</string>
+    <string name="deletemovie_btn">Film löschen!</string>
+
 </resources>

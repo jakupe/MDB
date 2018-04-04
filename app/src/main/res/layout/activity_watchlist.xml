@@ -15,7 +15,7 @@
             android:id="@+id/deleteAllBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Alles löschen" />
+            android:text="@string/deleteall_btn" />
 
         <ListView
             android:id="@+id/listViewWatchlist"

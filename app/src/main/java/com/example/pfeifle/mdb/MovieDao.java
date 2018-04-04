@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Created by Foecking on 27.03.2018.
  */
+//db access interface
 @Dao
 public interface MovieDao {
 

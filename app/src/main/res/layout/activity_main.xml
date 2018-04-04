@@ -16,20 +16,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Filmname"
+            android:hint="@string/hint_text"
             android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/searchBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Suchen" />
+            android:text="@string/search_btn" />
 
         <Button
             android:id="@+id/watchlistBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Watchliste" />
+            android:text="@string/watchlist_btn" />
 
         <ListView
             android:id="@+id/listView"
