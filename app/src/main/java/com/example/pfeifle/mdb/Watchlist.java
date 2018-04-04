@@ -56,36 +56,31 @@ public class Watchlist extends AppCompatActivity {
 
 
     protected void display() {
-        if (Buffer.getMovieList() == null) {
-            //TODO: Error ausgeben
-        } else {
-            ml = Buffer.getMovieList();
-            List valueList = new ArrayList<String>();
-            if (ml.size() > 0) {
-                deleteAllBtn.setEnabled(true);
-                for (int i = 0; i < ml.size(); i++)
-                    valueList.add(ml.get(i).getTitle().toString());
-            }
-            else {
-                valueList.add(getString(R.string.noMovieSaved));
-                deleteAllBtn.setEnabled(false);
-            }
-
-            listViewWatchlist.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
-            listViewWatchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    try {
-                        idIs = i;
-                        detail();
-                    } catch(Exception e){
-                        Log.i("NoDetails", "No Details in ListView Object");
-                        detailFail();
-                    }
-                }
-            });
-
+        ml = Buffer.getMovieList();
+        List valueList = new ArrayList<String>();
+        if (ml.size() > 0) {
+            deleteAllBtn.setEnabled(true);
+            for (int i = 0; i < ml.size(); i++)
+                valueList.add(ml.get(i).getTitle().toString());
         }
+        else {
+            valueList.add(getString(R.string.noMovieSaved));
+            deleteAllBtn.setEnabled(false);
+        }
+
+        listViewWatchlist.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
+        listViewWatchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                try {
+                    idIs = i;
+                    detail();
+                } catch(Exception e){
+                    Log.i("NoDetails", "No Details in ListView Object");
+                    detailFail();
+                }
+            }
+        });
 
     }
 

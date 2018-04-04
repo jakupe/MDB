@@ -26,7 +26,7 @@ public class DisplayDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        //info aus intentaufruf fuer fall unterscheidung
+        // info aus intentaufruf fuer fall unterscheidung
         Intent intent = getIntent();
         extra = intent.getStringExtra("extraData");
 
@@ -71,6 +71,7 @@ public class DisplayDetail extends AppCompatActivity {
         // get Movie Data
         Movie m = Buffer.getMovie();
 
+        // Set attributes
         name.setText(m.getTitle());
         runtime.setText(m.getRuntime());
         originalName.setText(m.getOriginalTitle());
