@@ -93,11 +93,9 @@ public class Main extends AppCompatActivity {
         // get results
         try {
             String results = jo.getString("results");
-            results = results.substring(1);
-            results = results.substring(0, results.length() - 1);
 
             // extracting results from data
-            JSONArray ja = new JSONObject("{\"res\":[" + results + "]}").getJSONArray("res");
+            JSONArray ja = new JSONObject("{\"res\":" + results + "}").getJSONArray("res");
             movies = new Movie[ja.length()];
 
             // loop to split results and get movies
@@ -111,8 +109,8 @@ public class Main extends AppCompatActivity {
         display();
     }
 
+    // clicked for more details
     private void detailFinish(JSONObject jo) {
-        // clicked for more details
         new Buffer(movies[idIs], jo);
         Intent intent = new Intent(this, DisplayDetail.class);
         intent.putExtra("extraData", "main");
@@ -120,18 +118,18 @@ public class Main extends AppCompatActivity {
         //startActivity(new Intent(this, DisplayDetail.class));
     }
 
+    // Error if JSON is null
     private void fail() {
-        // Error if JSON is null
         Toast.makeText(this, getString(R.string.networkErrorMsg), Toast.LENGTH_SHORT).show();
     }
 
+    //error if no details
     private void detailFail() {
-        //error if no details
         Toast.makeText(this, getString(R.string.noDetails), Toast.LENGTH_SHORT).show();
     }
 
+    // List movie names
     private void display() {
-        // List movie names
         final List valueList = new ArrayList<String>();
         if (movies.length > 0)
             for (int i = 0; i < movies.length; i++)
