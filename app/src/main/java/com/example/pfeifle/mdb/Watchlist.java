@@ -41,7 +41,7 @@ public class Watchlist extends AppCompatActivity {
                 while (!ready);
                 Log.i("DB_DEL", "weiter");
                 display();
-                //Main.di.deleteAllMovies();
+
             }
         });
 

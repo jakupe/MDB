@@ -1,11 +1,10 @@
 package com.example.pfeifle.mdb;
 
-import android.content.Intent;
+
 import android.os.AsyncTask;
 import android.util.Log;
-
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+
 
 /**
  * Created by Foecking on 28.03.2018.
@@ -17,15 +16,6 @@ public class DatabaseInitializer  {
     private MovieDatabase mDb = null;
     private DbAccess dba = null;
     private Watchlist wl = null;
-
-    //protected static MovieDatabase database;
-
-    public static DatabaseInitializer INSTANCE;
-    private static final String DATABASE_NAME = "MovieDatabase";
-   /* private static final String PREFERENCES = "RoomDemo.preferences";
-    private static final String KEY_FORCE_UPDATE = "force_update";*/
-
-
 
 
     public DatabaseInitializer() {
@@ -46,7 +36,7 @@ public class DatabaseInitializer  {
         new Buffer(movieList);
         Watchlist.ready = true;
 
-        //Context c = new Main().getMainContext();
+
         //Intent i = new Intent(new Intent(Main.getMainContext(), Watchlist.class));
         //Main.getMainContext().startActivity(i);
     }
@@ -130,24 +120,6 @@ public class DatabaseInitializer  {
         }
 
     }
-/*
-    public MovieDatabase getDB() {
-        return database;
-    }
 
-    public boolean isForceUpdate() {
-        return getSP().getBoolean(KEY_FORCE_UPDATE, true);
-    }
-
-    public void setForceUpdate(boolean force) {
-        SharedPreferences.Editor edit = getSP().edit();
-        edit.putBoolean(KEY_FORCE_UPDATE, force);
-        edit.apply();
-    }
-
-    private SharedPreferences getSP() {
-        return getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-    }
-*/
 
 }
