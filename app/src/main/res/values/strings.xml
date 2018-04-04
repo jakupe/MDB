@@ -18,7 +18,7 @@
     <string name="view_year">Jahr</string>
     <string name="view_rating">Bewertung</string>
     <string name="view_count">Anzahl</string>
-    <string name="view_population">Besucherzahl</string>
+    <string name="view_population">Beliebtheit</string>
     <string name="view_genre">Genres</string>
     <string name="view_overview">Übersicht</string>
 </resources>

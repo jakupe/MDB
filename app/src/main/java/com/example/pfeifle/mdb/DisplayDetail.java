@@ -73,16 +73,45 @@ public class DisplayDetail extends AppCompatActivity {
         Movie m = Buffer.getMovie();
 
         // Set attributes
-        name.setText(m.getTitle());
-        runtime.setText(m.getRuntime());
-        originalName.setText(m.getOriginalTitle());
-        language.setText(m.getOriginalLanguage());
-        year.setText(m.getReleaseDate());
-        vote.setText(m.getVoteAverage());
-        count.setText(m.getVoteCount());
-        population.setText(m.getPopulation());
-        genre.setText(m.getGenres());
-        overview.setText(m.getOverview());
+        if (!m.getTitle().matches(""))
+            name.setText(m.getTitle());
+        else name.setText("???");
+
+        if (!m.getRuntime().matches("0"))
+            runtime.setText(m.getRuntime() + " Min.");
+        else runtime.setText("???");
+
+        if (!m.getOriginalTitle().matches(""))
+            originalName.setText(m.getOriginalTitle());
+        else originalName.setText("???");
+
+        if (!m.getOriginalLanguage().matches(""))
+            language.setText(m.getOriginalLanguage());
+        else language.setText("???");
+
+        if (!m.getReleaseDate().matches(""))
+            year.setText(m.getReleaseDate());
+        else year.setText("???");
+
+        if (!m.getVoteAverage().matches("0.0"))
+            vote.setText(m.getVoteAverage());
+        else vote.setText("???");
+
+        if (!m.getVoteCount().matches("0"))
+            count.setText(m.getVoteCount());
+        else count.setText("???");
+
+        if (!m.getPopulation().matches("0.0"))
+            population.setText(m.getPopulation());
+        else population.setText("???");
+
+        if (!m.getGenres().matches(""))
+            genre.setText(m.getGenres());
+        else genre.setText("???");
+
+        if (!m.getOverview().matches(""))
+            overview.setText(m.getOverview());
+        else overview.setText("???");
 
     }
 
