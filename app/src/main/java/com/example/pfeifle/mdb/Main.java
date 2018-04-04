@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -124,9 +125,14 @@ public class Main extends AppCompatActivity {
         Toast.makeText(this, getString(R.string.networkErrorMsg), Toast.LENGTH_SHORT).show();
     }
 
+    private void detailFail() {
+        //error if no details
+        Toast.makeText(this, getString(R.string.noDetails), Toast.LENGTH_SHORT).show();
+    }
+
     private void display() {
         // List movie names
-        List valueList = new ArrayList<String>();
+        final List valueList = new ArrayList<String>();
         if (movies.length > 0)
             for (int i = 0; i < movies.length; i++)
                 valueList.add(movies[i].getTitle());
@@ -135,16 +141,27 @@ public class Main extends AppCompatActivity {
 
         // Show list and make clickable
         lv.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            // Onclick Listener for Details
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                aa = new ApiAccess(ar);
-                aa.execute(getDetailsUrl1 + movies[i].getId() + getDetailsUrl2);
-                idIs = i;
-            }
-        });
-    }
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                // Onclick Listener for Details
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    /*if(valueList.get(0).toString().equals(getString(R.string.noMovieFoundMsg))){
+
+                    }*/
+                    try {
+                        aa = new ApiAccess(ar);
+                        aa.execute(getDetailsUrl1 + movies[i].getId() + getDetailsUrl2);
+                        idIs = i;
+                    }
+                    catch(Exception e) {
+                            Log.i("NoDetails", "No Details in ListView Object");
+                            detailFail();
+                        }
+                }
+            });
+        }
+
 
     private void apiRes() {
         ar = new ApiResponse() {

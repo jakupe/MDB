@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.sql.Ref;
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ public class Watchlist extends AppCompatActivity {
     private Button deleteAllBtn;
     private List<Movie> ml = null;
     private static RefreshDisplay rd = null;
-    private String noMovieSaved = "Es wurde noch kein Film gespeichert";
     private int idIs = 0;
 
     @Override
@@ -61,18 +61,27 @@ public class Watchlist extends AppCompatActivity {
         } else {
             ml = Buffer.getMovieList();
             List valueList = new ArrayList<String>();
-            if (ml.size() > 0)
+            if (ml.size() > 0) {
+                deleteAllBtn.setEnabled(true);
                 for (int i = 0; i < ml.size(); i++)
                     valueList.add(ml.get(i).getTitle().toString());
-            else
-                valueList.add(noMovieSaved);
+            }
+            else {
+                valueList.add(getString(R.string.noMovieSaved));
+                deleteAllBtn.setEnabled(false);
+            }
 
             listViewWatchlist.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
             listViewWatchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    idIs = i;
-                    detail();
+                    try {
+                        idIs = i;
+                        detail();
+                    } catch(Exception e){
+                        Log.i("NoDetails", "No Details in ListView Object");
+                        detailFail();
+                    }
                 }
             });
 
@@ -89,6 +98,11 @@ public class Watchlist extends AppCompatActivity {
 
     protected static RefreshDisplay getRefreshDisplay() {
         return rd;
+    }
+
+    private void detailFail() {
+        //error if no details
+        Toast.makeText(this, getString(R.string.noDetails), Toast.LENGTH_SHORT).show();
     }
 
 

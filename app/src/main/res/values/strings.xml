@@ -9,5 +9,7 @@
     <string name="noMovieMsg">Bitte Filmname eingeben!</string>
     <string name="noMovieFoundMsg">Kein Film gefunden!</string>
     <string name="networkErrorMsg">Bitte Netzwerkverbindung prüfen!</string>
+    <string name="noMovieSaved">Es wurde noch kein Film gespeichert</string>
+    <string name="noDetails">Keine Filmdetails vorhanden!</string>
 
 </resources>

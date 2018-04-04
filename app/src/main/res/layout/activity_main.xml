@@ -19,17 +19,26 @@
             android:hint="@string/hint_text"
             android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/searchBtn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/search_btn" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/watchlistBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/watchlist_btn" />
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/search_btn" />
+
+            <Button
+                android:id="@+id/watchlistBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/watchlist_btn" />
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/listView"
