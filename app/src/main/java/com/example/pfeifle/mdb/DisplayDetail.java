@@ -33,7 +33,7 @@ public class DisplayDetail extends AppCompatActivity {
         saveBtn = findViewById(R.id.addToWatchList);
         //wenn displaydetail aus watchlist aufgerufen dann btn text aendern
         if(extra.equals("watchlist"))
-            saveBtn.setText("Film löschen");
+            saveBtn.setText(getString(R.string.deletemovie_btn));
 
 
         // Add Onclick Listener for save btn
