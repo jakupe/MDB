@@ -13,14 +13,13 @@ import org.json.JSONObject;
 /**
  * Created by Pfeifle on 19.03.2018.
  */
+//entity klasse movie
 @Entity(tableName = "movie")
 class Movie {
-
+    //attribute
     @PrimaryKey(autoGenerate = false)
-    @NonNull private String id;
-
-
-    //@NonNull private long dbid;
+    @NonNull
+    private String id;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -56,8 +55,8 @@ class Movie {
     private String voteCount = "";
 
     public Movie(@NonNull String id, String title) {
-            this.id = id;
-            this.title = title;
+        this.id = id;
+        this.title = title;
     }
 
     protected void createDetails(JSONObject jo) {
@@ -92,15 +91,12 @@ class Movie {
 
     }
 
+    //getter und setter
     @NonNull
     public String getId() {
         return id;
     }
 
-    /*@NonNull
-    public long getDbid() {
-        return dbid;
-    }*/
 
     public String getTitle() {
         return title;
@@ -149,10 +145,6 @@ class Movie {
     public void setId(@NonNull String id) {
         this.id = id;
     }
-
-    /*public void setDbid(@NonNull long dbid) {
-        this.dbid = dbid;
-    }*/
 
     public void setTitle(String title) {
         this.title = title;

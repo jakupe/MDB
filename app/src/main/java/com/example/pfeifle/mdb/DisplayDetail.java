@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,19 +19,19 @@ public class DisplayDetail extends AppCompatActivity {
     private Button saveBtn;
     private String extra = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        //info aus intentaufruf fuer fall unterscheidung
         Intent intent = getIntent();
         extra = intent.getStringExtra("extraData");
 
         // TODO: View
         lv      = findViewById(R.id.detailView);
         saveBtn = findViewById(R.id.addToWatchList);
-        // TODO Btn ändern
+        //wenn displaydetail aus watchlist aufgerufen dann btn text aendern
         if(extra.equals("watchlist"))
             saveBtn.setText("Film löschen");
 
@@ -41,10 +40,11 @@ public class DisplayDetail extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                //wenn displaydetail aus watchlist aufgerufen dann deletemovie aufruf und aktivity beenden
                 if(extra.equals("watchlist")){
                     new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId());
                     finish();
+                //ansonsten addmovie befehl ausfuehren
                 } else {
                     new DatabaseInitializer().addMovie();
                 }
