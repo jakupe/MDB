@@ -1,11 +1,10 @@
 package com.example.pfeifle.mdb;
 
-import android.content.Intent;
+
 import android.os.AsyncTask;
 import android.util.Log;
-
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+
 
 /**
  * Created by Foecking on 28.03.2018.
@@ -16,15 +15,7 @@ public class DatabaseInitializer  {
     private PopulateDbAsync task;
     private MovieDatabase mDb = null;
     private DbAccess dba = null;
-
-    //protected static MovieDatabase database;
-
-    public static DatabaseInitializer INSTANCE;
-    private static final String DATABASE_NAME = "MovieDatabase";
-   /* private static final String PREFERENCES = "RoomDemo.preferences";
-    private static final String KEY_FORCE_UPDATE = "force_update";*/
-
-
+    private Watchlist wl = null;
 
 
     public DatabaseInitializer() {
@@ -43,9 +34,11 @@ public class DatabaseInitializer  {
 
     protected void finishDbAccess(List<Movie> movieList) {
         new Buffer(movieList);
-        //Context c = new Main().getMainContext();
-        Intent i = new Intent(new Intent(Main.getMainContext(), Watchlist.class));
-        Main.getMainContext().startActivity(i);
+        Watchlist.ready = true;
+
+
+        //Intent i = new Intent(new Intent(Main.getMainContext(), Watchlist.class));
+        //Main.getMainContext().startActivity(i);
     }
 
     protected void addMovie()   {
@@ -66,6 +59,7 @@ public class DatabaseInitializer  {
     private class PopulateDbAsync extends AsyncTask<String, Void, List<Movie>> {
         public DbAccess dba;
         private Movie m = null;
+        private List<Movie> mlist;
 
         public PopulateDbAsync(DbAccess dba) {
             this.dba = dba;
@@ -85,17 +79,16 @@ public class DatabaseInitializer  {
             switch(input) {
                 case "push":
                     Log.i("DB", "PUSH");
-                    List<Movie> mlist = db.movieDao().getAll();
+                    mlist = db.movieDao().getAll();
                     m = Buffer.getMovie();
                     boolean same = false;
-                    for(int i=0; i<mlist.size(); i++)
-                        if (m.getId().equals(mlist.get(i).getId())) {
+                    for(int j=0; j<mlist.size(); j++)
+                        if (m.getId().equals(mlist.get(j).getId())) {
                             same = true;
                             break;
                         }
                     if(!same)
                         db.movieDao().insert(m);
-
                     break;
 
                 case "delete":
@@ -111,8 +104,14 @@ public class DatabaseInitializer  {
 
                 default:
             }
-            db.movieDao();
-            return db.movieDao().getAll();
+
+
+            if (db.movieDao().getAll()==null){
+                mlist.add(new Movie("0", "Kein Film vorhanden"));
+            } else{
+                mlist = db.movieDao().getAll();
+            }
+            return mlist;
         }
 
         @Override
@@ -121,24 +120,6 @@ public class DatabaseInitializer  {
         }
 
     }
-/*
-    public MovieDatabase getDB() {
-        return database;
-    }
 
-    public boolean isForceUpdate() {
-        return getSP().getBoolean(KEY_FORCE_UPDATE, true);
-    }
-
-    public void setForceUpdate(boolean force) {
-        SharedPreferences.Editor edit = getSP().edit();
-        edit.putBoolean(KEY_FORCE_UPDATE, force);
-        edit.apply();
-    }
-
-    private SharedPreferences getSP() {
-        return getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-    }
-*/
 
 }

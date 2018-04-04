@@ -40,10 +40,9 @@ public class Main extends AppCompatActivity {
     private Movie movies[];
     private ApiResponse ar = null;
     private ApiAccess aa = null;
-    //public static DatabaseInitializer di;
 	public static MovieDatabase mdb;
 
-    //public static Main INSTANCE;
+
     private static Context context;
 
 
@@ -81,8 +80,7 @@ public class Main extends AppCompatActivity {
         DbAsyncTask dbat = new DbAsyncTask();
         dbat.execute();
 
-        // Load saved movies from database
-        new DatabaseInitializer().fillBuffer();
+
 
         Main.context = getApplicationContext();
 
@@ -194,6 +192,8 @@ public class Main extends AppCompatActivity {
 
 
 mdb = db;
+// Load saved movies from database
+            new DatabaseInitializer().fillBuffer();
 
         }
 
