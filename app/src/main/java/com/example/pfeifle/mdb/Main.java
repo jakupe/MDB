@@ -3,9 +3,7 @@ package com.example.pfeifle.mdb;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -60,10 +58,10 @@ public class Main extends AppCompatActivity {
 
 
         // init
-        lv        = (ListView) findViewById(R.id.listView);
-        movieName = (EditText) findViewById(R.id.movieName);
-        searchBtn = (Button)   findViewById(R.id.searchBtn);
-        watchlistBtn = (Button) findViewById(R.id.watchlistBtn);
+        lv              = findViewById(R.id.listView);
+        movieName       = findViewById(R.id.movieName);
+        searchBtn       = findViewById(R.id.searchBtn);
+        watchlistBtn    = findViewById(R.id.watchlistBtn);
 
         apiRes();
 

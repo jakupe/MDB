@@ -29,8 +29,9 @@ public class DisplayDetail extends AppCompatActivity {
         Intent intent = getIntent();
         extra = intent.getStringExtra("extraData");
 
-        lv      = (ListView) findViewById(R.id.detailView);
-        saveBtn = (Button)   findViewById(R.id.addToWatchList);
+        // TODO: View
+        //lv      = findViewById(R.id.detailView);
+        saveBtn = findViewById(R.id.addToWatchList);
         // TODO Btn ändern
         if(extra.equals("watchlist")) {
             saveBtn.setText("Film löschen");

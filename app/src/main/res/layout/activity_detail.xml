@@ -1,157 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.pfeifle.mdb.DisplayDetail">
 
-    <TableLayout
-        android:layout_width="382dp"
-        android:layout_height="match_parent"
-        android:stretchColumns="0"
-        tools:layout_editor_absoluteX="2dp">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="7dp">
 
-        <TableRow
-            android:id="@+id/firstRow"
-            android:layout_width="0dp"
+        <TextView
+
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Name"
+            android:textColor="#000"
+            android:textSize="12dp" />
 
-            <TextView
+        <TextView
 
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Name"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/runtime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Length"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/secondRow"
-            android:layout_width="fill_parent"
+            android:id="@+id/runtime"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Length"
+            android:textColor="#000"
+            android:textSize="12dp" />
+    </LinearLayout>
 
-            <TextView
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="43dp">
 
-                android:id="@+id/originalName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Original Name"
-                android:textColor="#000"
-                android:textSize="12dp" />
+        <TextView
 
-            <TextView
-
-                android:id="@+id/language"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Language"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Year"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/thirdRow"
-            android:layout_width="fill_parent"
+            android:id="@+id/originalName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Original Name"
+            android:textColor="#000"
+            android:textSize="12dp" />
 
-            <TextView
+        <TextView
 
-                android:id="@+id/vote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Vote"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Count"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <TextView
-
-                android:id="@+id/population"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Population"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/fourthRow"
-            android:layout_width="fill_parent"
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Language"
+            android:textColor="#000"
+            android:textSize="12dp" />
 
-            <TextView
+        <TextView
 
-                android:id="@+id/genre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Genre"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/fifthRow"
-            android:layout_width="fill_parent"
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Year"
+            android:textColor="#000"
+            android:textSize="12dp" />
+    </LinearLayout>
 
-            <TextView
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="79dp">
 
-                android:id="@+id/overview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                android:text="Overview"
-                android:textColor="#000"
-                android:textSize="12dp" />
+        <TextView
 
-        </TableRow>
-    </TableLayout>
+            android:id="@+id/vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Vote"
+            android:textColor="#000"
+            android:textSize="12dp" />
+
+        <TextView
+
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Count"
+            android:textColor="#000"
+            android:textSize="12dp" />
+
+        <TextView
+
+            android:id="@+id/population"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Population"
+            android:textColor="#000"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="115dp">
+
+        <TextView
+
+            android:id="@+id/genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Genre"
+            android:textColor="#000"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/addToWatchList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+
+            android:id="@+id/overview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="Overview"
+            android:textColor="#000"
+            android:textSize="12dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/addToWatchList"

@@ -1,8 +1,6 @@
 package com.example.pfeifle.mdb;
 
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
@@ -22,7 +20,7 @@ import java.io.IOException;
 
 public class ApiAccess extends AsyncTask<String, Void, JSONObject> {
     private JSONObject jo = null;
-    public ApiResponse ar = null;
+    public ApiResponse ar;
 
     public ApiAccess(ApiResponse ar) {
         this.ar = ar;
