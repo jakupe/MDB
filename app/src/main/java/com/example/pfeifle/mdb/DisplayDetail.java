@@ -42,7 +42,7 @@ public class DisplayDetail extends AppCompatActivity {
             public void onClick(View v) {
                 //wenn displaydetail aus watchlist aufgerufen dann deletemovie aufruf und aktivity beenden
                 if(extra.equals("watchlist")){
-                    new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId());
+                    new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId(), Watchlist.getRefreshDisplay());
                     finish();
                 //ansonsten addmovie befehl ausfuehren
                 } else {

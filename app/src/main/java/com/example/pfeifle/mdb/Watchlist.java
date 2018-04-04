@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Watchlist extends AppCompatActivity {
     private ListView listViewWatchlist;
     private Button deleteAllBtn;
     private List<Movie> ml = null;
-    private RefreshDisplay rd = null;
+    private static RefreshDisplay rd = null;
     private String noMovieSaved = "Es wurde noch kein Film gespeichert";
     private int idIs = 0;
 
@@ -86,6 +87,9 @@ public class Watchlist extends AppCompatActivity {
         startActivity(intent);
     }
 
+    protected static RefreshDisplay getRefreshDisplay() {
+        return rd;
+    }
 
 
 }

@@ -36,7 +36,7 @@ public class DatabaseInitializer  {
 
     protected void finishDbAccess(List<Movie> movieList) {
         new Buffer(movieList);
-        if (input == "deleteAll")
+        if (input == "deleteAll" || input == "delete")
             rd.refresh();
 
         //Intent i = new Intent(new Intent(Main.getMainContext(), Watchlist.class));
@@ -47,7 +47,10 @@ public class DatabaseInitializer  {
         task.execute("push");
     }
 
-    protected void deleteMovie(String id) { task.execute("delete", id); }
+    protected void deleteMovie(String id, RefreshDisplay rd) {
+        this.rd = rd;
+        task.execute("delete", id);
+    }
 
     protected void deleteAllMovies(RefreshDisplay rd) {
         this.rd = rd;
