@@ -23,7 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends AppCompatActivity {
-    private String apiKey = "0e81ea650bb87e98021985bb7e90350d", searchMovieUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + apiKey + "&page=1&include_adult=true&language=de&query=", getDetailsUrl1 = "https://api.themoviedb.org/3/movie/", getDetailsUrl2 = "?language=de&api_key=" + apiKey;
+    private String apiKey = "0e81ea650bb87e98021985bb7e90350d",
+            searchMovieUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + apiKey + "&page=1&include_adult=true&language=de&query=",
+            getDetailsUrl1 = "https://api.themoviedb.org/3/movie/",
+            getDetailsUrl2 = "?language=de&api_key=" + apiKey;
 
     private ListView lv;
     private EditText movieName;
@@ -138,27 +141,23 @@ public class Main extends AppCompatActivity {
             valueList.add(getString(R.string.noMovieFoundMsg));
 
         // Show list and make clickable
-        lv.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                // Onclick Listener for Details
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    /*if(valueList.get(0).toString().equals(getString(R.string.noMovieFoundMsg))){
-
-                    }*/
-                    try {
-                        aa = new ApiAccess(ar);
-                        aa.execute(getDetailsUrl1 + movies[i].getId() + getDetailsUrl2);
-                        idIs = i;
-                    }
-                    catch(Exception e) {
-                            Log.i("NoDetails", "No Details in ListView Object");
-                            detailFail();
-                        }
+        lv.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, valueList));
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // Onclick Listener for Details
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                try {
+                    aa = new ApiAccess(ar);
+                    aa.execute(getDetailsUrl1 + movies[i].getId() + getDetailsUrl2);
+                    idIs = i;
                 }
-            });
-        }
+                catch(Exception e) {
+                        Log.i("NoDetails", "No Details in ListView Object");
+                        detailFail();
+                    }
+            }
+        });
+    }
 
 
     private void apiRes() {
@@ -181,12 +180,8 @@ public class Main extends AppCompatActivity {
 
         @Override
         protected MovieDatabase doInBackground(Void... params) {
-
             MovieDatabase db;
-
             final String DATABASE_NAME = "MovieDatabase";
-
-
             db = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, DATABASE_NAME).build();
 
             return db;

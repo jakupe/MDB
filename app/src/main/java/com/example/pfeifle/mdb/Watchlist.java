@@ -68,7 +68,7 @@ public class Watchlist extends AppCompatActivity {
             deleteAllBtn.setEnabled(false);
         }
 
-        listViewWatchlist.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
+        listViewWatchlist.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, valueList));
         listViewWatchlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
