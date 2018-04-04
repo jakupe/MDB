@@ -3,6 +3,7 @@ package com.example.pfeifle.mdb;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,7 +42,7 @@ public class DisplayDetail extends AppCompatActivity {
         population  = findViewById(R.id.population);
         genre       = findViewById(R.id.genre);
         overview    = findViewById(R.id.overview);
-
+        overview.setMovementMethod(new ScrollingMovementMethod());
 
         saveBtn = findViewById(R.id.addToWatchList);
         //wenn displaydetail aus watchlist aufgerufen dann btn text aendern
