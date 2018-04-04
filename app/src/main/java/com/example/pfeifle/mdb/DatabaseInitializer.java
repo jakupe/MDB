@@ -16,6 +16,8 @@ public class DatabaseInitializer  {
     private MovieDatabase mDb = null;
     private DbAccess dba = null;
     private Watchlist wl = null;
+    private RefreshDisplay rd;
+    private String input = null;
 
 
     public DatabaseInitializer() {
@@ -34,8 +36,8 @@ public class DatabaseInitializer  {
 
     protected void finishDbAccess(List<Movie> movieList) {
         new Buffer(movieList);
-        Watchlist.ready = true;
-
+        if (input == "deleteAll")
+            rd.refresh();
 
         //Intent i = new Intent(new Intent(Main.getMainContext(), Watchlist.class));
         //Main.getMainContext().startActivity(i);
@@ -47,7 +49,8 @@ public class DatabaseInitializer  {
 
     protected void deleteMovie(String id) { task.execute("delete", id); }
 
-    protected void deleteAllMovies() {
+    protected void deleteAllMovies(RefreshDisplay rd) {
+        this.rd = rd;
         task.execute("deleteAll");
     }
 
@@ -69,7 +72,7 @@ public class DatabaseInitializer  {
         protected List<Movie> doInBackground(final String... params) {
             MovieDatabase db = Main.mdb;
 
-            String input = params[0];
+            input = params[0];
             int id=0;
             if(params.length > 1) {
                 String sid = params[1];
@@ -117,6 +120,7 @@ public class DatabaseInitializer  {
         @Override
         protected void onPostExecute(List<Movie> movies) {
             dba.finish(movies);
+
         }
 
     }

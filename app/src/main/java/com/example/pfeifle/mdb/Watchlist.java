@@ -18,10 +18,9 @@ public class Watchlist extends AppCompatActivity {
     private ListView listViewWatchlist;
     private Button deleteAllBtn;
     private List<Movie> ml = null;
+    private RefreshDisplay rd = null;
     private String noMovieSaved = "Es wurde noch kein Film gespeichert";
     private int idIs = 0;
-    protected static boolean ready;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,30 +30,34 @@ public class Watchlist extends AppCompatActivity {
         listViewWatchlist = findViewById(R.id.listViewWatchlist);
         deleteAllBtn      = findViewById(R.id.deleteAllBtn);
 
+        // Interface
+        finRefresh();
+
         // Onclick listener for delete btn
         deleteAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ready = false;
-                new DatabaseInitializer().deleteAllMovies();
-                Log.i("DB_DEL", "ready = "+ready);
-                while (!ready);
-                Log.i("DB_DEL", "weiter");
-                display();
-
+                new DatabaseInitializer().deleteAllMovies(rd);
             }
         });
 
         display();
     }
 
-    //TODO implement listView with movies from db
+    private void finRefresh() {
+        rd = new RefreshDisplay() {
+            @Override
+            public void refresh() {
+                display();
+            }
+        };
+    }
+
 
     protected void display() {
         if (Buffer.getMovieList() == null) {
             //TODO: Error ausgeben
         } else {
-
             ml = Buffer.getMovieList();
             List valueList = new ArrayList<String>();
             if (ml.size() > 0)
