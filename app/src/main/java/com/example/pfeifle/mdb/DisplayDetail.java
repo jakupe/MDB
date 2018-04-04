@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,7 @@ import java.util.List;
  */
 
 public class DisplayDetail extends AppCompatActivity {
-    private ListView lv;
+    private TextView name, runtime, originalName, language, year, vote, count, population, genre, overview;
     private Button saveBtn;
     private String extra = "";
 
@@ -28,8 +30,19 @@ public class DisplayDetail extends AppCompatActivity {
         Intent intent = getIntent();
         extra = intent.getStringExtra("extraData");
 
-        // TODO: View
-        lv      = findViewById(R.id.detailView);
+        // TextViews
+        name        = findViewById(R.id.name);
+        runtime     = findViewById(R.id.runtime);
+        originalName= findViewById(R.id.originalName);
+        language    = findViewById(R.id.language);
+        year        = findViewById(R.id.year);
+        vote        = findViewById(R.id.vote);
+        count       = findViewById(R.id.count);
+        population  = findViewById(R.id.population);
+        genre       = findViewById(R.id.genre);
+        overview    = findViewById(R.id.overview);
+
+
         saveBtn = findViewById(R.id.addToWatchList);
         //wenn displaydetail aus watchlist aufgerufen dann btn text aendern
         if(extra.equals("watchlist"))
@@ -58,35 +71,16 @@ public class DisplayDetail extends AppCompatActivity {
         // get Movie Data
         Movie m = Buffer.getMovie();
 
-        // Create List
-        List valueList = new ArrayList<String>();
-
-        // Add Text to List
-        if(!m.getTitle().matches(""))
-            valueList.add("Title \n"        + m.getTitle());
-        if(!m.getGenres().matches(""))
-            valueList.add("Genres \n"       + m.getGenres());
-        if(!m.getOverview().matches(""))
-            valueList.add("Overview \n"     + m.getOverview());
-        if(!m.getHomepage().matches(""))
-            valueList.add("Homepage \n"     + m.getHomepage());
-        if(!m.getRuntime().matches(""))
-            valueList.add("Runtime \n"      + m.getRuntime() + " Minutes");
-        if(!m.getReleaseDate().matches(""))
-            valueList.add("Release Date \n" + m.getReleaseDate());
-        if(!m.getPopulation().matches(""))
-            valueList.add("Population \n"   + m.getPopulation());
-        if(!m.getVoteAverage().matches(""))
-            valueList.add("Vote \n"         + m.getVoteAverage() + " / 10");
-        if(!m.getVoteCount().matches(""))
-            valueList.add("Vote Count \n"   + m.getVoteCount());
-        if(!m.getOriginalLanguage().matches(""))
-            valueList.add("Original Language \n"    + m.getOriginalLanguage());
-        if(!m.getOriginalTitle().matches(""))
-            valueList.add("Original Title \n"       + m.getOriginalTitle());
-
-        // Show list
-        lv.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, valueList));
+        name.setText(m.getTitle());
+        runtime.setText(m.getRuntime());
+        originalName.setText(m.getOriginalTitle());
+        language.setText(m.getOriginalLanguage());
+        year.setText(m.getReleaseDate());
+        vote.setText(m.getVoteAverage());
+        count.setText(m.getVoteCount());
+        population.setText(m.getPopulation());
+        genre.setText(m.getGenres());
+        overview.setText(m.getOverview());
 
     }
 
