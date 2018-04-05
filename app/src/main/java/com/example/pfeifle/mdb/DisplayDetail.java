@@ -47,7 +47,7 @@ public class DisplayDetail extends AppCompatActivity {
         } else if(!isSaved(Buffer.getMovie(),Buffer.getMovieList())){
             saveBtn.setText(getString(R.string.addmovie_btn));
         }
-
+        saveBtn.setEnabled(true);
 
 
         // Add Onclick Listener for save btn
@@ -57,7 +57,7 @@ public class DisplayDetail extends AppCompatActivity {
                 //wenn film in db gespeichert dann deletemovie aufruf und aktivity beenden
                 if(isSaved(Buffer.getMovie(),Buffer.getMovieList())){
                     new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId(), Watchlist.getRefreshDisplay());
-
+                    saveBtn.setEnabled(false);
                     finish();
                 //ansonsten wenn film nicht gespeichert dann addmovie befehl ausfuehren
                 } else if(!isSaved(Buffer.getMovie(),Buffer.getMovieList())){

@@ -57,6 +57,7 @@ public class Main extends AppCompatActivity {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                searchBtn.setEnabled(false);
                 searchMovie(v);
             }
         });
@@ -80,8 +81,10 @@ public class Main extends AppCompatActivity {
         aa = new ApiAccess(ar);
         if (!movieName.getText().toString().matches(""))
             aa.execute(searchMovieUrl + movieName.getText().toString());
-        else
+        else {
             Toast.makeText(this, getString(R.string.noMovieMsg), Toast.LENGTH_SHORT).show();
+            searchBtn.setEnabled(true);
+        }
     }
 
     private void listFinish(JSONObject jo) {
@@ -105,6 +108,7 @@ public class Main extends AppCompatActivity {
             e.printStackTrace();
         }
         display();
+        searchBtn.setEnabled(true);
     }
 
     // clicked for more details
@@ -119,6 +123,7 @@ public class Main extends AppCompatActivity {
     // Error if JSON is null
     private void fail() {
         Toast.makeText(this, getString(R.string.networkErrorMsg), Toast.LENGTH_SHORT).show();
+        searchBtn.setEnabled(true);
     }
 
     //error if no details
