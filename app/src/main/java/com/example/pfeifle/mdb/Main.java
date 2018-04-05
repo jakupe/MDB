@@ -1,7 +1,6 @@
 package com.example.pfeifle.mdb;
 
 import android.arch.persistence.room.Room;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -39,8 +38,6 @@ public class Main extends AppCompatActivity {
     private ApiAccess aa = null;
     public static MovieDatabase mdb;
 
-    private static Context context;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +72,6 @@ public class Main extends AppCompatActivity {
         // create database
         DbAsyncTask dbat = new DbAsyncTask();
         dbat.execute();
-
-        //get context
-        Main.context = getApplicationContext();
 
     }
 
@@ -176,8 +170,6 @@ public class Main extends AppCompatActivity {
 
     //asynctask zur db erstellung
     public class DbAsyncTask extends AsyncTask<Void, Void, MovieDatabase> {
-
-
         @Override
         protected MovieDatabase doInBackground(Void... params) {
             MovieDatabase db;
@@ -185,27 +177,17 @@ public class Main extends AppCompatActivity {
             db = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, DATABASE_NAME).build();
 
             return db;
-
-
         }
 
         @Override
         protected void onPostExecute(MovieDatabase db) {
-
-
             mdb = db;
-// Load saved movies from database
+            // Load saved movies from database
             new DatabaseInitializer().fillBuffer();
 
         }
 
 
     }
-
-    //get context
-    protected static Context getMainContext() {
-        return Main.context;
-    }
-
 
 }

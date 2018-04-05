@@ -30,9 +30,6 @@ public interface MovieDao {
     void deleteAll();
 
     @Insert
-    void insertAll(Movie... movies);
-
-    @Insert
     void insert(Movie movie);
 
     @Delete

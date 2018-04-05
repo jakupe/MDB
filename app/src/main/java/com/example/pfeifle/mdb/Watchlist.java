@@ -11,12 +11,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Watchlist extends AppCompatActivity {
-
     private ListView listViewWatchlist;
     private Button deleteAllBtn;
     private List<Movie> ml = null;
@@ -96,7 +94,7 @@ public class Watchlist extends AppCompatActivity {
     }
 
     private void detailFail() {
-        //error if no details
+        // error if no details
         Toast.makeText(this, getString(R.string.noDetails), Toast.LENGTH_SHORT).show();
     }
 

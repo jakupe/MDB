@@ -13,9 +13,7 @@ import java.util.List;
 public class DatabaseInitializer  {
 
     private PopulateDbAsync task;
-    private MovieDatabase mDb = null;
     private DbAccess dba = null;
-    private Watchlist wl = null;
     private RefreshDisplay rd;
     private String input = null;
 
@@ -38,9 +36,6 @@ public class DatabaseInitializer  {
         new Buffer(movieList);
         if (input == "deleteAll" || input == "delete")
             rd.refresh();
-
-        //Intent i = new Intent(new Intent(Main.getMainContext(), Watchlist.class));
-        //Main.getMainContext().startActivity(i);
     }
 
     protected void addMovie() {
