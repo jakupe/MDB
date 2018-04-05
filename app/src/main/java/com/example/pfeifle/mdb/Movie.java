@@ -55,8 +55,7 @@ class Movie {
     @ColumnInfo(name = "voteCount")
     private String voteCount = "";
 
-    @ColumnInfo(name = "isSaved")
-    private String isSaved = "";
+
 
     public Movie(@NonNull String id, String title) {
         this.id = id;
@@ -145,13 +144,7 @@ class Movie {
         return voteCount;
     }
 
-    public String getIsSaved() {
-        return isSaved;
-    }
 
-    public void setIsSaved(String isSaved) {
-        this.isSaved = isSaved;
-    }
 
     public void setId(@NonNull String id) {
         this.id = id;

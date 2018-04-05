@@ -1,12 +1,13 @@
 package com.example.pfeifle.mdb;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.List;
 
 
 /**
@@ -16,16 +17,15 @@ import android.widget.TextView;
 public class DisplayDetail extends AppCompatActivity {
     private TextView name, runtime, originalName, language, year, vote, count, population, genre, overview;
     private Button saveBtn;
-    private String extra = "";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        // info aus intentaufruf fuer fall unterscheidung
-        Intent intent = getIntent();
-        extra = intent.getStringExtra("extraData");
 
         // TextViews
         name        = findViewById(R.id.name);
@@ -41,22 +41,29 @@ public class DisplayDetail extends AppCompatActivity {
         overview.setMovementMethod(new ScrollingMovementMethod());
 
         saveBtn = findViewById(R.id.addToWatchList);
-        //wenn displaydetail aus watchlist aufgerufen dann btn text aendern
-        if(extra.equals("watchlist"))
+        //wenn film in db gespeichert bzw nicht gespeichert dann btn text aendern
+        if(isSaved(Buffer.getMovie(),Buffer.getMovieList())) {
             saveBtn.setText(getString(R.string.deletemovie_btn));
+        } else if(!isSaved(Buffer.getMovie(),Buffer.getMovieList())){
+            saveBtn.setText(getString(R.string.addmovie_btn));
+        }
+
 
 
         // Add Onclick Listener for save btn
         saveBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //wenn displaydetail aus watchlist aufgerufen dann deletemovie aufruf und aktivity beenden
-                if(extra.equals("watchlist")){
+                //wenn film in db gespeichert dann deletemovie aufruf und aktivity beenden
+                if(isSaved(Buffer.getMovie(),Buffer.getMovieList())){
                     new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId(), Watchlist.getRefreshDisplay());
+
                     finish();
-                //ansonsten addmovie befehl ausfuehren
-                } else {
+                //ansonsten wenn film nicht gespeichert dann addmovie befehl ausfuehren
+                } else if(!isSaved(Buffer.getMovie(),Buffer.getMovieList())){
                     new DatabaseInitializer().addMovie();
+                    saveBtn.setText(getString(R.string.deletemovie_btn));
+
                 }
             }
         });
@@ -109,6 +116,19 @@ public class DisplayDetail extends AppCompatActivity {
             overview.setText(m.getOverview());
         else overview.setText("???");
 
+    }
+
+    //ueberpruefen ob film in db gespeichert ist
+    private boolean isSaved(Movie m, List<Movie> ml){
+        boolean saved = false;
+        for(int i=0; i<ml.size(); i++){
+            if(m.getId().equals(ml.get(i).getId())){
+                saved = true;
+                break;
+            }
+        }
+
+        return saved;
     }
 
 }

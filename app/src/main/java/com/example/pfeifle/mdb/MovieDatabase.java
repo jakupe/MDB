@@ -11,13 +11,8 @@ import android.arch.persistence.room.migration.Migration;
  * Created by Foecking on 27.03.2018.
  */
 
-@Database(entities = {Movie.class}, version = 2)
+@Database(entities = {Movie.class}, version = 1)
 public abstract class MovieDatabase extends RoomDatabase {
     public abstract MovieDao movieDao();
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE 'movie' ADD COLUMN 'isSaved' TEXT");
-        }
-    };
+
 }
