@@ -3,11 +3,11 @@
     <string name="hint_text">Filmname</string>
     <string name="search_btn">Suchen</string>
     <string name="watchlist_btn">Watchlist</string>
-    <string name="deleteall_btn">Alles löschen!</string>
+    <string name="deleteall_btn">Alles löschen</string>
     <string name="addmovie_btn">Film hinzufügen</string>
-    <string name="deletemovie_btn">Film löschen!</string>
+    <string name="deletemovie_btn">Film löschen</string>
     <string name="noMovieMsg">Bitte Filmname eingeben!</string>
-    <string name="noMovieFoundMsg">Kein Film gefunden!</string>
+    <string name="noMovieFoundMsg">Kein Film gefunden</string>
     <string name="networkErrorMsg">Bitte Netzwerkverbindung prüfen!</string>
     <string name="noMovieSaved">Es wurde noch kein Film gespeichert</string>
     <string name="noDetails">Keine Filmdetails vorhanden!</string>
