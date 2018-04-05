@@ -56,7 +56,7 @@ public class DisplayDetail extends AppCompatActivity {
             public void onClick(View v) {
                 //wenn film in db gespeichert dann deletemovie aufruf und aktivity beenden
                 if(isSaved(Buffer.getMovie(),Buffer.getMovieList())){
-                    new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId(), Watchlist.getRefreshDisplay());
+                    new DatabaseInitializer().deleteMovie(Buffer.getMovie().getId());
                     saveBtn.setEnabled(false);
                     finish();
                 //ansonsten wenn film nicht gespeichert dann addmovie befehl ausfuehren

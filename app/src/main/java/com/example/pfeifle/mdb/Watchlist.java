@@ -36,7 +36,7 @@ public class Watchlist extends AppCompatActivity {
         deleteAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatabaseInitializer().deleteAllMovies(rd);
+                new DatabaseInitializer().deleteAllMovies();
             }
         });
 

@@ -87,7 +87,8 @@ class Movie {
             for (int i = 0; i < ja.length(); i++)
                 genres += new JSONObject(ja.getString(i)).getString("name") + ", ";
 
-            genres = genres.substring(0, genres.length() - 2);
+            if (genres.length() > 2)
+                genres = genres.substring(0, genres.length() - 2);
         } catch (JSONException e) {
             e.printStackTrace();
         }

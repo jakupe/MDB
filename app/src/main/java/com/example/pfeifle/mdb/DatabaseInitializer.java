@@ -14,7 +14,6 @@ public class DatabaseInitializer  {
 
     private PopulateDbAsync task;
     private DbAccess dba = null;
-    private RefreshDisplay rd;
     private String input = null;
 
 
@@ -34,21 +33,19 @@ public class DatabaseInitializer  {
 
     protected void finishDbAccess(List<Movie> movieList) {
         new Buffer(movieList);
-        if (input == "deleteAll" || input == "delete")
-            rd.refresh();
+        if (input == "deleteAll")
+            Watchlist.getRefreshDisplay().refresh();
     }
 
     protected void addMovie() {
         task.execute("push");
     }
 
-    protected void deleteMovie(String id, RefreshDisplay rd) {
-        this.rd = rd;
+    protected void deleteMovie(String id) {
         task.execute("delete", id);
     }
 
-    protected void deleteAllMovies(RefreshDisplay rd) {
-        this.rd = rd;
+    protected void deleteAllMovies() {
         task.execute("deleteAll");
     }
 
