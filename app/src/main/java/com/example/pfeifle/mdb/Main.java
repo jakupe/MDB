@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.pfeifle.mdb.MovieDatabase.MIGRATION_1_2;
+
 public class Main extends AppCompatActivity {
     private String apiKey = "0e81ea650bb87e98021985bb7e90350d",
             searchMovieUrl = "https://api.themoviedb.org/3/search/movie?api_key=" + apiKey + "&page=1&include_adult=true&language=de&query=",
@@ -174,7 +176,9 @@ public class Main extends AppCompatActivity {
         protected MovieDatabase doInBackground(Void... params) {
             MovieDatabase db;
             final String DATABASE_NAME = "MovieDatabase";
-            db = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, DATABASE_NAME).build();
+            db = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, DATABASE_NAME)
+                    .addMigrations(MIGRATION_1_2)
+                    .build();
 
             return db;
         }

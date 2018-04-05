@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +54,9 @@ class Movie {
 
     @ColumnInfo(name = "voteCount")
     private String voteCount = "";
+
+    @ColumnInfo(name = "isSaved")
+    private String isSaved = "";
 
     public Movie(@NonNull String id, String title) {
         this.id = id;
@@ -139,6 +143,14 @@ class Movie {
 
     public String getVoteCount() {
         return voteCount;
+    }
+
+    public String getIsSaved() {
+        return isSaved;
+    }
+
+    public void setIsSaved(String isSaved) {
+        this.isSaved = isSaved;
     }
 
     public void setId(@NonNull String id) {
